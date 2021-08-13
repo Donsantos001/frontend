@@ -83,7 +83,7 @@ export default function AddOtherSupplies({ route, navigation }) {
         <Picker
           selectedValue={supplies}
           onValueChange={(itemValue, itemIndex) => setSupplies(itemValue)}
-          style={{ marginLeft: 20, marginTop: 10, color: 'black', borderColor: 'chocolate', borderRadius: 52, height: 30, borderWidth: 3 }}>
+          style={styles.pick}>
           <Picker.Item label="Add the supplies" value="" />
           <Picker.Item label="Air-fresheners, Price 2.0 €" value="Air-fresheners" />
           <Picker.Item label="Air Bag Diagnostic, Price 232.0 €" value="Air Bag Diagnostic" />
@@ -129,7 +129,6 @@ export default function AddOtherSupplies({ route, navigation }) {
 
       <View >
         <Mytextinput
-          style={{outlineWidth: 0}}
           placeholder="Insert booking id"
           placeholderTextColor="#003f5c"
           onChangeText={(id) => setId(id)}
@@ -166,6 +165,21 @@ const styles = StyleSheet.create({
   text: {
     color: '#ffffff',
   },
-
+  pick: {
+    height: 30, 
+    width: 200, 
+    color: 'black' 
+ },
+ viewPick: {
+  color: '#ffffff',
+  borderWidth: 3,
+  marginLeft: 20,
+  marginTop: 10, 
+  marginRight: 35,
+  color: 'black', 
+  borderColor: 'chocolate', 
+  borderRadius: 50,
+  backgroundColor: 'white',
+},
 
 });

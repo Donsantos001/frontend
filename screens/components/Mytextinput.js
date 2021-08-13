@@ -17,14 +17,12 @@ const Mytextinput = (props) => {
         width: 200,
         height: 30,
         backgroundColor: 'white',
-        paddingLeft: 7,  
-        outlineWidth: 0,
+        paddingLeft: 7, 
       }}>
       <TextInput
         //className= 
          style={{
           backgroundColor: "red",
-          outlineWidth: 0,
           height: 40,
           margin: 12,
           borderWidth: 1,

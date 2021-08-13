@@ -78,7 +78,6 @@ export default function UpdateStatusOfBookings({ route, navigation }) {
 
       <View>
         <Mytextinput
-          style={{outlineWidth: 0}}
           placeholder="Insert the id of the booking"
           placeholderTextColor="transparent"
           onChangeText={(id) => setId(id)}
@@ -90,7 +89,7 @@ export default function UpdateStatusOfBookings({ route, navigation }) {
         <Picker
           selectedValue={status}
           onValueChange={(itemValue, itemIndex) => setStatus(itemValue)}
-          style={{ marginLeft: 20, marginTop: 10, color: 'black', borderColor: 'chocolate', borderRadius: 52, height: 30, borderWidth: 3 }}>
+          style={styles.pick}>
           <Picker.Item label="Update the status of the booking" value="" />
           <Picker.Item label="In service" value="In service" />
           <Picker.Item label="Completed" value="Completed" />
@@ -129,5 +128,21 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
 
+  pick: {
+    height: 30, 
+    width: 200, 
+    color: 'black' 
+ },
+ viewPick: {
+  color: '#ffffff',
+  borderWidth: 3,
+  marginLeft: 20,
+  marginTop: 10, 
+  marginRight: 35,
+  color: 'black', 
+  borderColor: 'chocolate', 
+  borderRadius: 50,
+  backgroundColor: 'white',
+},
 
 });

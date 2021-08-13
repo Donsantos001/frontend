@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { useState } from 'react';
-import {  StyleSheet, Text, View, StatusBar, ImageBackground, FlatList } from 'react-native';
+import {  StyleSheet, Text, View, StatusBar, ImageBackground, FlatList, Platform, TouchableOpacity } from 'react-native';
 import Mybutton from './components/Mybutton';
 //import 'react-datepicker/dist/react-datepicker.css';
-import DatePicker from 'react-datepicker';
+// import DatePicker from 'react-native-datepicker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import moment from 'moment';
 
@@ -13,6 +14,37 @@ export default function GetBookingsPerDay({ route, navigation }) {
   const { username } = route.params;
   const [content, setContent] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
+
+
+  
+  const [selectedDate2, setDate] = useState(new Date());
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
+    setDate(currentDate);
+  };
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode('date');
+  };
+
+  const showTimepicker = () => {
+    showMode('time');
+  };
+
+
+  const formatDate = (date) => {
+    return `${date.getDate()}/${date.getMonth() +
+      1}/${date.getFullYear()}`;
+  };
 
 
   function BookingDay() {
@@ -25,14 +57,12 @@ export default function GetBookingsPerDay({ route, navigation }) {
     }
 
     const convert = (rawDate) => {
-      var date = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(rawDate)
-      var datearray = date.split("/");
-      var newdate = datearray[2] + '-' + datearray[0] + '-' + datearray[1];
+      var newdate = moment(rawDate).format('YYYY-MM-DD');
       return newdate;
     }
 
 
-    fetch('https://garagethesis.herokuapp.com/admin/bookings/day?selectedDate=' + convert(selectedDate), {
+    fetch('https://garagethesis.herokuapp.com/admin/bookings/day?selectedDate=' + convert(selectedDate2), {
       method: 'GET',
       mode: 'cors',
       cache: 'no-cache',
@@ -75,12 +105,52 @@ export default function GetBookingsPerDay({ route, navigation }) {
       </Text>
 
       <View style={styles.modelPick}>
-        <DatePicker selected={selectedDate}
-          onChange={date => setSelectedDate(date)}
-          dateFormat='yyyy/MM/dd'
-          filterDate={date => date.getDay() != 0}
-          isClearable
+
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={selectedDate2}
+          mode={mode}
+          is24Hour={true}
+          display="default"
+          onChange={onChange}
         />
+       )}
+
+
+
+
+        <TouchableOpacity onPress={showDatepicker}>
+          <Text style={styles.title}>{formatDate(selectedDate2)}</Text>
+        </TouchableOpacity>
+
+
+
+      {/* <DatePicker
+        style={{width: 200}}
+        date={selectedDate}
+        mode="date"
+        placeholder="select date"
+        format="YYYY-MM-DD"
+        minDate="2016-05-01"
+        maxDate="2016-06-01"
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        customStyles={{
+          dateIcon: {
+            position: 'absolute',
+            left: 0,
+            top: 4,
+            marginLeft: 0
+          },
+          dateInput: {
+            marginLeft: 36
+          }
+          // ... You can check the source to find the other keys.
+        }}
+        onDateChange={date => setSelectedDate(date)}
+      /> */}
+
       </View>
 
 
@@ -159,8 +229,10 @@ let listItemView = (booking) => {
         console.log('==>', part);
         return (<View key={index} style={{ flexDirection: 'row' }}>
 
-          <Text style={styles.textAtribute}> name: </Text> <Text style={styles.text1}> {part.name}, </Text>
-          <Text style={styles.textAtribute}> price: </Text> <Text style={styles.text1}> {part.price} €</Text></View>)
+            <Text style={styles.textAtribute}> name: <Text style={styles.text1}> {part.name}, </Text> </Text>
+            <Text style={styles.textAtribute}> price: <Text style={styles.text1}> {part.price} €</Text> </Text> 
+            
+            </View>)
       })}
     </View>
 
@@ -212,7 +284,7 @@ const styles = StyleSheet.create({
   textJson: {
     color: 'black',
     fontSize: 17,
-    fontFamily: 'sans-serif-medium',
+    fontFamily: (Platform.OS === 'ios') ? 'Arial' : 'sans-serif',
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',

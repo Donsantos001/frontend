@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, FlatList, ScrollView, KeyboardAvoidingView, ImageBackground, StyleSheet, SafeAreaView, Text, } from 'react-native';
+import { View, FlatList, ScrollView, KeyboardAvoidingView, ImageBackground, StyleSheet, SafeAreaView, Text, Platform} from 'react-native';
 import Mybutton from './components/Mybutton';
 
 

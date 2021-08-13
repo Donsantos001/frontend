@@ -1,18 +1,22 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, View, ImageBackground, StatusBar, FlatList, Platform } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
+import { ScrollView, StyleSheet, Text, View, StatusBar, FlatList, ImageBackground, Platform } from 'react-native';
+import Mytextinput from './components/Mytextinput';
 import Mybutton from './components/Mybutton';
 import moment from 'moment';
 
 
 export default function GetAllBookings({ route, navigation }) {
 
-  const [content, setContent] = useState("");
   const { token } = route.params;
   const { username } = route.params;
+  const [content, setContent] = useState("");
+
+
 
   function AllBookings() {
-
+  
     fetch('https://garagethesis.herokuapp.com/admin/bookings', {
       method: 'GET',
       mode: 'cors',
@@ -35,6 +39,8 @@ export default function GetAllBookings({ route, navigation }) {
       });
   }
 
+
+
   return (
     <ImageBackground style={styles.container} source={require('../assets/fondo.png')}>
       <StatusBar style="auto" />
@@ -46,7 +52,7 @@ export default function GetAllBookings({ route, navigation }) {
           color: 'black',
           fontWeight: 'bold',
         }}>
-        Press click in the button to see all the bookings in Ger's Garage
+        {username}, please press click in the button to see all your bookings in Ger's Garage
       </Text>
 
       <Mybutton title="View of your bookings" customClick={AllBookings} />
@@ -60,7 +66,6 @@ export default function GetAllBookings({ route, navigation }) {
 
   );
 };
-
 
 let listItemView = (booking) => {
   return (
@@ -120,11 +125,13 @@ let listItemView = (booking) => {
       <View style={styles.text}>
         <Text style={styles.textTittle}> Additional Supply : </Text>
         {booking.parts.map((part, index) => {
-          console.log('==>', part);
+          console.log('==>', part)
           return (<View key={index} style={{ flexDirection: 'row' }}>
 
-            <Text style={styles.textAtribute}> name: </Text> <Text style={styles.text1}> {part.name}, </Text>
-            <Text style={styles.textAtribute}> price: </Text> <Text style={styles.text1}> {part.price} €</Text></View>)
+            <Text style={styles.textAtribute}> name: <Text style={styles.text1}> {part.name}, </Text> </Text>
+            <Text style={styles.textAtribute}> price: <Text style={styles.text1}> {part.price} €</Text> </Text> 
+            
+            </View>)
         })}
       </View>
 
@@ -145,13 +152,15 @@ let listItemView = (booking) => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
+
   goBtn: {
     width: "80%",
     borderRadius: 25,
@@ -170,18 +179,20 @@ const styles = StyleSheet.create({
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
+    // backgroundColor: 'lightgray'
   },
   textJson: {
     color: 'black',
     fontSize: 17,
-    fontFamily: 'sans-serif-medium',
+    fontFamily: (Platform.OS === 'ios') ? 'Arial' : 'sans-serif',
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
+    // backgroundColor: 'orangered'
   },
   id: {
     color: 'red',
-    fontSize: 15,
+    fontSize: 17,
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
@@ -189,9 +200,10 @@ const styles = StyleSheet.create({
   text1: {
     color: 'black',
     fontSize: 17,
-    fontFamily: 'Avenir',
+    fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'sans-serif',
     padding: 10,
     marginLeft: -15,
+    fontWeight: 'normal'
   },
   textTittle: {
     color: 'black',
@@ -209,4 +221,5 @@ const styles = StyleSheet.create({
     padding: 10,
     marginRight: 0,
   },
+
 });

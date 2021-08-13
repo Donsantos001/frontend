@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, View, ImageBackground, FlatList } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, FlatList, Platform, TouchableOpacity } from 'react-native';
 import Mybutton from './components/Mybutton';
 import DatePicker from 'react-datepicker';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
 //import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 
@@ -12,6 +14,37 @@ export default function ViewRosterPerDay({ route, navigation }) {
   const { username } = route.params;
   const [content, setContent] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
+
+
+  const [selectedDate2, setDate] = useState(new Date());
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
+    setDate(currentDate);
+  };
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode('date');
+  };
+
+  const showTimepicker = () => {
+    showMode('time');
+  };
+
+
+  const formatDate = (date) => {
+    return `${date.getDate()}/${date.getMonth() +
+      1}/${date.getFullYear()}`;
+  };
+
 
 
   function RosterDay() {
@@ -24,14 +57,11 @@ export default function ViewRosterPerDay({ route, navigation }) {
     }
 
     const convert = (rawDate) => {
-      var date = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(rawDate)
-      var datearray = date.split("/");
-      var newdate = datearray[2] + '-' + datearray[0] + '-' + datearray[1];
+      var newdate = moment(rawDate).format('YYYY-MM-DD');
       return newdate;
     }
 
-
-    fetch('https://garagethesis.herokuapp.com/admin/roster?date=' + convert(selectedDate), {
+    fetch('https://garagethesis.herokuapp.com/admin/roster?date=' + convert(selectedDate2), {
       method: 'GET',
       mode: 'cors',
       cache: 'no-cache',
@@ -72,12 +102,31 @@ export default function ViewRosterPerDay({ route, navigation }) {
       </Text>
 
       <View style={styles.model}>
-        <DatePicker selected={selectedDate}
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={selectedDate2}
+          mode={mode}
+          is24Hour={true}
+          display="default"
+          onChange={onChange}
+        />
+       )}
+
+
+
+
+        <TouchableOpacity onPress={showDatepicker}>
+          <Text style={styles.title}>{formatDate(selectedDate2)}</Text>
+        </TouchableOpacity>
+
+
+        {/* <DatePicker selected={selectedDate}
           onChange={date => setSelectedDate(date)}
           dateFormat='yyyy/MM/dd'
           filterDate={date => date.getDay() != 0}
           isClearable
-        />
+        /> */}
       </View>
 
 

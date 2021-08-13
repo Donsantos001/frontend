@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { StyleSheet, Text, TouchableOpacity, Image, ImageBackground } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, Image, ImageBackground, Platform } from "react-native";
 
 // Home admin page
 export default function HomeAdmin({ route, navigation }) {
@@ -21,7 +21,7 @@ export default function HomeAdmin({ route, navigation }) {
               flex: 1,
               borderColor: 'black',
               fontWeight: 'bold',
-              fontFamily: 'Roboto',
+              fontFamily: (Platform.OS === 'ios') ? 'Arial' : 'sans-serif',
               fontSize: 30
              
             }}>

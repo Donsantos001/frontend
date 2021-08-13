@@ -2,12 +2,15 @@ import * as React from 'react';
 import { useState } from 'react';
 // import { Picker } from '@react-native-picker/picker';
 import {Picker} from '@react-native-picker/picker';
-import { StyleSheet, Text, View, StatusBar, ImageBackground, Button, Platform, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TextInput, View, StatusBar, ImageBackground, Button, Platform, TouchableOpacity } from 'react-native';
 import Mytextinput from './components/Mytextinput';
 import Mybutton from './components/Mybutton';
 
-import DateTimePicker from '@react-native-community/datetimepicker';
-import DatePicker from 'react-native-datepicker';
+// import DateTimePicker from '@react-native-community/datetimepicker';
+// import DatePicker from 'react-native-datepicker';
+// import DateTimePicker from "react-native-modal-datetime-picker";
+import ModalPicker from 'react-native-modal-picker';
+
 import moment from 'moment';
 
 
@@ -32,34 +35,83 @@ export default function InsertBooking({ route, navigation }) {
   // const [value, onChange] = useState('10:00');
 
 
-  const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
+  // const [selectedDate2, setDate] = useState(new Date());
+  // const [mode, setMode] = useState('date');
+  // const [show, setShow] = useState(false);
 
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'ios');
-    setDate(currentDate);
+  // const onChange = (event, selectedDate) => {
+  //   const currentDate = selectedDate || date;
+  //   setShow(Platform.OS === 'ios');
+  //   setDate(currentDate);
+  // };
+
+  // const showMode = (currentMode) => {
+  //   setShow(true);
+  //   setMode(currentMode);
+  // };
+
+  // const showDatepicker = () => {
+  //   showMode('date');
+  // };
+
+  // const showTimepicker = () => {
+  //   showMode('time');
+  // };
+
+
+  // const formatDate = (date) => {
+  //   return `${date.getDate()}/${date.getMonth() +
+  //     1}/${date.getFullYear()}`;
+  // };
+
+  const [isDateTimePickerVisible, setisDateTimePickerVisible] = useState(false);
+  const [selectedDate2, setDate] = useState(new Date());
+ 
+  const showDateTimePicker = () => {
+    setisDateTimePickerVisible(true);
+  };
+ 
+  const hideDateTimePicker = () => {
+    setisDateTimePickerVisible(false);
+  };
+ 
+  const handleDatePicked = (date) => {
+    setDate(date);
+    hideDateTimePicker();
   };
 
-  const showMode = (currentMode) => {
-    setShow(true);
-    setMode(currentMode);
-  };
-
-  const showDatepicker = () => {
-    showMode('date');
-  };
-
-  const showTimepicker = () => {
-    showMode('time');
-  };
 
 
-  const formatDate = (date) => {
-    return `${date.getDate()}/${date.getMonth() +
-      1}/${date.getFullYear()}`;
-  };
+
+
+  let index = 0;
+  const dataArray = [
+      { key: index++, section: true, label: 'Fruits' },
+      { key: index++, label: 'Red Apples' },
+      { key: index++, label: 'Cherries' },
+      { key: index++, label: 'Cranberries' },
+      { key: index++, label: 'Pink Grapefruit' },
+      { key: index++, label: 'Raspberries' },
+      { key: index++, section: true, label: 'Vegetables' },
+      { key: index++, label: 'Beets' },
+      { key: index++, label: 'Red Peppers' },
+      { key: index++, label: 'Radishes' },
+      { key: index++, label: 'Radicchio' },
+      { key: index++, label: 'Red Onions' },
+      { key: index++, label: 'Red Potatoes' },
+      { key: index++, label: 'Rhubarb' },
+      { key: index++, label: 'Tomatoes' }
+  ];
+
+  index = 0;
+  const vehicleTypes = [
+    { key: index++, label: 'Car' },
+    { key: index++, label: 'Motorbike' },
+    { key: index++, label: 'Small van' },
+    { key: index++, label: 'Small bus' },
+    { key: index++, label: 'Pickup' }
+  ];
+
 
 
   function Booking() {
@@ -154,7 +206,7 @@ export default function InsertBooking({ route, navigation }) {
           vehicleEngineType: vehicleEngineType,
         },
         serviceType: serviceType,
-        date: convert(selectedDate) + 'T' + time,
+        date: convert(selectedDate2) + 'T' + time,
         comment: comment,
       }) // receives a string
     }).then((response) => response.text())
@@ -177,6 +229,7 @@ export default function InsertBooking({ route, navigation }) {
 
   return (
     // <View style={styles.container}>
+    
     <ImageBackground style={styles.container} source={require('../assets/fondo.png')}>
       <StatusBar style="auto" />
 
@@ -214,6 +267,27 @@ export default function InsertBooking({ route, navigation }) {
         />
       </View>
       <View style={styles.viewPick}>
+
+          <ModalPicker
+              data={dataArray}
+              initValue="Select the type of your vehicle"
+              onChange={(option)=>{ setVehicleType(option.value) }} />
+
+          {/* <ModalPicker
+              data={dataArray}
+              initValue="Select something yummy!"
+              onChange={(option)=> setInput(option.label)}>
+              
+              <TextInput
+                  style={{borderWidth:1, borderColor:'#ccc', padding:10, height:30}}
+                  editable={false}
+                  placeholder="Select something yummy!"
+                  value={textInputValue} />
+                  
+          </ModalPicker> */}
+      </View>
+
+      {/* <View style={styles.viewPick}>
         <Picker
           selectedValue={vehicleType}
           onValueChange={(itemValue, itemIndex) => setVehicleType(itemValue)}
@@ -225,7 +299,7 @@ export default function InsertBooking({ route, navigation }) {
           <Picker.Item label="Small bus" value="Small bus" />
           <Picker.Item label="Pickup" value="Pickup" />
         </Picker>
-      </View>
+      </View> */}
 
       <View style={styles.viewPick}>
         <Picker
@@ -397,10 +471,10 @@ export default function InsertBooking({ route, navigation }) {
       <View>
         <Button onPress={showTimepicker} title="Show time picker!" />
       </View> */}
-      {show && (
+      {/* {show && (
         <DateTimePicker
           testID="dateTimePicker"
-          value={date}
+          value={selectedDate2}
           mode={mode}
           is24Hour={true}
           display="default"
@@ -412,17 +486,23 @@ export default function InsertBooking({ route, navigation }) {
 
 
         <TouchableOpacity onPress={showDatepicker}>
-          <Text style={styles.title}>{formatDate(date)}</Text>
-        </TouchableOpacity>
+          <Text style={styles.title}>{formatDate(selectedDate2)}</Text>
+        </TouchableOpacity> */}
 
 
 
 
+        <Button title="Show DatePicker" onPress={showDateTimePicker} />
+        <DateTimePicker
+          isVisible={isDateTimePickerVisible}
+          onConfirm={handleDatePicked}
+          onCancel={hideDateTimePicker}
+        />
 
 
 
 
-      <DatePicker
+      {/* <DatePicker
         style={{width: 200}}
         date={selectedDate}
         mode="date"
@@ -445,7 +525,7 @@ export default function InsertBooking({ route, navigation }) {
           // ... You can check the source to find the other keys.
         }}
         onDateChange={date => setSelectedDate(date)}
-      />
+      /> */}
 
       </View>
 

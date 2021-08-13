@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Image, ImageBackground } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image, ImageBackground, Platform } from "react-native";
 
 export default function HomeUser({ route, navigation }) {
   //parameters sent from the login page.
@@ -22,8 +22,8 @@ export default function HomeUser({ route, navigation }) {
               flex: 1,
               borderColor: 'black',
               fontWeight: 'bold',
-              //fontFamily: 'Lobster',
-              fontFamily: 'Roboto',
+              //fontFamily: (Platform.OS === 'ios') ? 'Arial' : 'sans-serif',
+              fontFamily: (Platform.OS === 'ios') ? 'Arial' : 'sans-serif',
               fontSize: 30
              
             }}>

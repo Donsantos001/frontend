@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, ImageBackground, Platform } from 'react-native';
 import Mybutton from './components/Mybutton';
 
 
@@ -111,8 +111,10 @@ let listItemView = (invoice) => {
           console.log('==>', part);
           return (<View key={index} style={{ flexDirection: 'row' }}>
 
-            <Text style={styles.textAtribute}> name: </Text> <Text style={styles.text1}> {part.name}, </Text>
-            <Text style={styles.textAtribute}> price: </Text> <Text style={styles.text1}> {part.price} €</Text></View>)
+            <Text style={styles.textAtribute}> name: <Text style={styles.text1}> {part.name}, </Text> </Text>
+            <Text style={styles.textAtribute}> price: <Text style={styles.text1}> {part.price} €</Text> </Text> 
+            
+            </View>)
         })}
       </View>
 
@@ -142,7 +144,7 @@ const styles = StyleSheet.create({
   text: {
     color: 'black',
     fontSize: 17,
-    fontFamily: 'Lobster',
+    fontFamily: (Platform.OS === 'ios') ? 'Arial' : 'sans-serif',
     fontWeight: 'bold',
     padding: 10,
     borderBottomWidth: 1,
@@ -152,7 +154,7 @@ const styles = StyleSheet.create({
   textJson: {
     color: 'black',
     fontSize: 17,
-    fontFamily: 'sans-serif-medium',
+    fontFamily: (Platform.OS === 'ios') ? 'Arial' : 'sans-serif',
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
@@ -168,14 +170,14 @@ const styles = StyleSheet.create({
   text1: {
     color: 'black',
     fontSize: 17,
-    fontFamily: 'Avenir',
+    fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'sans-serif',
     padding: 10,
     marginLeft: -15,
   },
   textAtribute: {
     color: 'black',
     fontSize: 17,
-    fontFamily: 'Lobster',
+    fontFamily: (Platform.OS === 'ios') ? 'Arial' : 'sans-serif',
     fontWeight: 'bold',
     padding: 10,
     marginRight: 0,
@@ -183,7 +185,7 @@ const styles = StyleSheet.create({
   textTittle: {
     color: 'black',
     fontSize: 17,
-    fontFamily: 'Lobster',
+    fontFamily: (Platform.OS === 'ios') ? 'Arial' : 'sans-serif',
     fontWeight: 'bold',
     padding: 10,
     marginLeft: -10,

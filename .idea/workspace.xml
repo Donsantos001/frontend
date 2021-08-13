@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c40afeab-2bdb-4e9c-a90b-173c5dede76e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/GetBookingsPerDay.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/GetBookingsPerDay.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/GetBookingsPerWeek.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/GetBookingsPerWeek.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/HomeAdmin.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/HomeAdmin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/HomeUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/HomeUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/InsertBooking.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/InsertBooking.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/components/Mytextinput.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/components/Mytextinput.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,11 +40,11 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="390" y="87" width="700" height="557" key="AVDManager" timestamp="1628806693115">
+    <state x="390" y="87" width="700" height="557" key="AVDManager" timestamp="1628820151572">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="721" y="168" width="560" height="440" key="AVDManager/0.0.1280.680@0.0.1280.680" timestamp="1627476212820" />
-    <state x="390" y="87" width="700" height="557" key="AVDManager/0.0.1600.860@0.0.1600.860" timestamp="1628806693115" />
+    <state x="390" y="87" width="700" height="557" key="AVDManager/0.0.1600.860@0.0.1600.860" timestamp="1628820151572" />
     <state x="450" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1628795990241">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
