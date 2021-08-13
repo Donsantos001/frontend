@@ -14,7 +14,7 @@ const Mytextinput = (props) => {
         borderColor: 'chocolate',
         borderWidth: 3,
         borderRadius: 50,
-        width: "90%",
+        width: 200,
         height: 30,
         backgroundColor: 'white',
         paddingLeft: 7,  

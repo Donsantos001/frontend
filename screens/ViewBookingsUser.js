@@ -17,7 +17,7 @@ export default function ViewBookingsUser({ route, navigation }) {
 
   function Bookings() {
 
-    fetch('http://localhost:8080/user/bookings/' + username, {
+    fetch('https://garagethesis.herokuapp.com/user/bookings/' + username, {
       method: 'GET',
       mode: 'cors',
       cache: 'no-cache',
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   text: {
     color: 'black',
     fontSize: 17,
-    fontFamily: 'Lobster',
+    fontFamily: (Platform.OS === 'ios') ? 'Arial' : 'sans-serif',
     fontWeight: 'bold',
     padding: 10,
     borderBottomWidth: 1,
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
   textTittle: {
     color: 'black',
     fontSize: 17,
-    fontFamily: 'Lobster',
+    fontFamily: (Platform.OS === 'ios') ? 'Arial' : 'sans-serif',
     fontWeight: 'bold',
     padding: 10,
     marginLeft: -10,
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
   textAtribute: {
     color: 'black',
     fontSize: 17,
-    fontFamily: 'Lobster',
+    fontFamily: (Platform.OS === 'ios') ? 'Arial' : 'sans-serif',
     fontWeight: 'bold',
     padding: 10,
     marginRight: 0,

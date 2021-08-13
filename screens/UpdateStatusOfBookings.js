@@ -24,7 +24,7 @@ export default function UpdateStatusOfBookings({ route, navigation }) {
       return;
     }
 
-    fetch('http://localhost:8080/admin/bookings/update?status=' + status + '&id=' + id, {
+    fetch('https://garagethesis.herokuapp.com/admin/bookings/update?status=' + status + '&id=' + id, {
       method: 'POST',
       mode: 'cors',
       cache: 'no-cache',

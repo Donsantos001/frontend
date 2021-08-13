@@ -14,7 +14,7 @@ export default function getInvoice({ route, navigation }) {
 
   function Receipt() {
 
-    fetch('http://localhost:8080/admin/bookings/invoice?username=' + username, {
+    fetch('https://garagethesis.herokuapp.com/admin/bookings/invoice?username=' + username, {
       method: 'GET',
       mode: 'cors',
       cache: 'no-cache',

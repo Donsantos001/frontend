@@ -23,7 +23,7 @@ export default function HomeUser({ route, navigation }) {
               borderColor: 'black',
               fontWeight: 'bold',
               //fontFamily: 'Lobster',
-              fontFamily: 'Arial',
+              fontFamily: 'Roboto',
               fontSize: 30
              
             }}>

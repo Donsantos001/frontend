@@ -24,7 +24,7 @@ export default function AssingnTaksToStaff({ route, navigation }) {
             return;
         }
 
-        fetch('http://localhost:8080/admin/bookings/staff?staffId=' + staffId + '&bookingId=' + bookingId, {
+        fetch('https://garagethesis.herokuapp.com/admin/bookings/staff?staffId=' + staffId + '&bookingId=' + bookingId, {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',

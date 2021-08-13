@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Picker } from '@react-native-picker/picker';
-import { StyleSheet, Text, View, StatusBar, ImageBackground, Button, Platform } from 'react-native';
+// import { Picker } from '@react-native-picker/picker';
+import {Picker} from '@react-native-picker/picker';
+import { StyleSheet, Text, View, StatusBar, ImageBackground, Button, Platform, TouchableOpacity } from 'react-native';
 import Mytextinput from './components/Mytextinput';
 import Mybutton from './components/Mybutton';
-//import DatePicker from 'react-native-datepicker';
-//import 'react-datepicker/dist/react-datepicker.css';
+
 import DateTimePicker from '@react-native-community/datetimepicker';
+import DatePicker from 'react-native-datepicker';
+import moment from 'moment';
 
 
 
@@ -30,7 +32,7 @@ export default function InsertBooking({ route, navigation }) {
   // const [value, onChange] = useState('10:00');
 
 
-  const [date, setDate] = useState(new Date(1598051730000));
+  const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
 
@@ -53,6 +55,11 @@ export default function InsertBooking({ route, navigation }) {
     showMode('time');
   };
 
+
+  const formatDate = (date) => {
+    return `${date.getDate()}/${date.getMonth() +
+      1}/${date.getFullYear()}`;
+  };
 
 
   function Booking() {
@@ -118,9 +125,10 @@ export default function InsertBooking({ route, navigation }) {
     }
     //format time
     const convert = (rawDate) => {
-      var date = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(rawDate)
-      var datearray = date.split("/");
-      var newdate = datearray[2] + '-' + datearray[0] + '-' + datearray[1];
+      // var date = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(rawDate)
+      // var datearray = date.split("/");
+      // var newdate = datearray[2] + '-' + datearray[0] + '-' + datearray[1];
+      var newdate = moment(rawDate).format('YYYY-MM-DD');
       return newdate;
     }
 
@@ -192,7 +200,7 @@ export default function InsertBooking({ route, navigation }) {
         Insert the phone number with the following example</Text>
       <View >
         <Mytextinput
-          style={{outlineWidth: 0}}
+          
           placeholder=" 0830732879  "
           placeholderTextColor="#003f5c"
           onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)}
@@ -200,7 +208,6 @@ export default function InsertBooking({ route, navigation }) {
       </View>
       <View >
         <Mytextinput
-          style={{outlineWidth: 0}}
           placeholder="Email"
           placeholderTextColor="#003f5c"
           onChangeText={(email) => setEmail(email)}
@@ -210,8 +217,8 @@ export default function InsertBooking({ route, navigation }) {
         <Picker
           selectedValue={vehicleType}
           onValueChange={(itemValue, itemIndex) => setVehicleType(itemValue)}
-          style={{ marginLeft: 20, marginTop: 10, color: 'black', borderColor: 'chocolate', borderRadius: 52, height: 30, borderWidth: 3 }}>
-          <Picker.Item label="Select the type of your vehicle" value="" />
+          style={styles.pick}>
+                      <Picker.Item label="Select the type of your vehicle" value="" />
           <Picker.Item label="Car" value="Car" />
           <Picker.Item label="Motorbike" value="Motorbike" />
           <Picker.Item label="Small van" value="Small van" />
@@ -224,8 +231,8 @@ export default function InsertBooking({ route, navigation }) {
         <Picker
           selectedValue={vehicleMake}
           onValueChange={(itemValue, itemIndex) => setVehicleMake(itemValue)}
-          style={{ marginLeft: 20, marginTop: 10, color: 'black', borderColor: 'chocolate', borderRadius: 50, height: 30, borderWidth: 3 }}>
-          <Picker.Item label="Select make of your vehicle" value="" />
+          style={styles.pick}>
+                      <Picker.Item label="Select make of your vehicle" value="" />
           <Picker.Item label="Audi A1" value="Audi A1" />
           <Picker.Item label="Audi A3" value="Audi A3" />
           <Picker.Item label="Audi A4" value="Audi A5" />
@@ -308,7 +315,7 @@ export default function InsertBooking({ route, navigation }) {
 
       <View >
         <Mytextinput
-          style={{outlineWidth: 0}}
+          
           placeholder="Insert the licence of the vehicle"
           placeholderTextColor="#003f5c"
           onChangeText={(vehicleLicence) => setVehicleLicence(vehicleLicence)}
@@ -319,8 +326,9 @@ export default function InsertBooking({ route, navigation }) {
         <Picker
           selectedValue={vehicleEngineType}
           onValueChange={(itemValue, itemIndex) => setVehicleEngineType(itemValue)}
-          style={{ marginLeft: 20, marginTop: 10, color: 'black', borderColor: 'chocolate', borderRadius: 50, height: 30, borderWidth: 3 }}>
-          <Picker.Item label="Select the engine of the vehicle" value="" />
+          style={styles.pick}>
+
+            <Picker.Item label="Select the engine of the vehicle" value="" />
           <Picker.Item label="Diesel" value="Diesel" />
           <Picker.Item label="Petrol" value="Petrol" />
           <Picker.Item label="Hybrid" value="Hybrid" />
@@ -332,7 +340,7 @@ export default function InsertBooking({ route, navigation }) {
         <Picker
           selectedValue={serviceType}
           onValueChange={(itemValue, itemIndex) => setServiceType(itemValue)}
-          style={{ marginLeft: 20, marginTop: 10, marginBottom: '20', color: 'black', borderColor: 'chocolate', borderRadius: 50, height: 30, borderWidth: 3 }}>
+          style={styles.pick}>
           <Picker.Item label="Select the type of service" value="" />
           <Picker.Item label="Anual Service, Price 230.90 €" value="Annual Service" />
           <Picker.Item label="Major Service, Price 330.50 €" value="Major Service" />
@@ -383,12 +391,12 @@ export default function InsertBooking({ route, navigation }) {
         }}
         onDateChange={date => setSelectedDate(date)}
       /> */}
-      <View>
+      {/* <View>
         <Button onPress={showDatepicker} title="Show date picker!" />
       </View>
       <View>
         <Button onPress={showTimepicker} title="Show time picker!" />
-      </View>
+      </View> */}
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
@@ -398,26 +406,65 @@ export default function InsertBooking({ route, navigation }) {
           display="default"
           onChange={onChange}
         />
-      )}
+       )}
+
+
+
+
+        <TouchableOpacity onPress={showDatepicker}>
+          <Text style={styles.title}>{formatDate(date)}</Text>
+        </TouchableOpacity>
+
+
+
+
+
+
+
+
+      <DatePicker
+        style={{width: 200}}
+        date={selectedDate}
+        mode="date"
+        placeholder="select date"
+        format="YYYY-MM-DD"
+        minDate="2016-05-01"
+        maxDate="2016-06-01"
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        customStyles={{
+          dateIcon: {
+            position: 'absolute',
+            left: 0,
+            top: 4,
+            marginLeft: 0
+          },
+          dateInput: {
+            marginLeft: 36
+          }
+          // ... You can check the source to find the other keys.
+        }}
+        onDateChange={date => setSelectedDate(date)}
+      />
+
       </View>
 
 
-      {/* <View style={styles.model}>
+      <View style={styles.model}>
         <Picker
           selectedValue={time}
           onValueChange={(itemValue, itemIndex) => setTime(itemValue)}
-          style={{}}>
+          style={styles.pick}>
           <Picker.Item label="Select the time" value="" />
           <Picker.Item label="10:00 AM" value="09:00:00" />
           <Picker.Item label="12:00 PM" value="11:00:00" />
           <Picker.Item label="15:00 PM" value="14:00:00" />
           <Picker.Item label="17:00 PM" value="16:00:00" />
         </Picker>
-      </View> */}
+      </View>
 
       <View >
         <Mytextinput
-          style={{outlineWidth: 0}}
           placeholder="Add comment if you need"
           placeholderTextColor="#003f5c"
           onChangeText={(comment) => setComment(comment)}
@@ -461,6 +508,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     marginLeft: 20,
+    marginRight: 35
   },
   modelPick: {
     color: '#ffffff',
@@ -477,4 +525,21 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
 
+  viewPick: {
+    color: '#ffffff',
+    borderWidth: 3,
+    marginLeft: 20,
+    marginTop: 10, 
+    marginRight: 35,
+    color: 'black', 
+    borderColor: 'chocolate', 
+    borderRadius: 50,
+    backgroundColor: 'white',
+  },
+  
+  pick: {
+     height: 30, 
+     width: 200, 
+     color: 'black' 
+  }
 });

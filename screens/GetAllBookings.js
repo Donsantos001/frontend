@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, View, ImageBackground, StatusBar, FlatList } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, StatusBar, FlatList, Platform } from 'react-native';
 import Mybutton from './components/Mybutton';
 import moment from 'moment';
 
@@ -13,7 +13,7 @@ export default function GetAllBookings({ route, navigation }) {
 
   function AllBookings() {
 
-    fetch('http://localhost:8080/admin/bookings', {
+    fetch('https://garagethesis.herokuapp.com/admin/bookings', {
       method: 'GET',
       mode: 'cors',
       cache: 'no-cache',
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   text: {
     color: 'black',
     fontSize: 17,
-    fontFamily: 'Lobster',
+    fontFamily: (Platform.OS === 'ios') ? 'Arial' : 'sans-serif',
     fontWeight: 'bold',
     padding: 10,
     borderBottomWidth: 1,
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
   textTittle: {
     color: 'black',
     fontSize: 17,
-    fontFamily: 'Lobster',
+    fontFamily: (Platform.OS === 'ios') ? 'Arial' : 'sans-serif',
     fontWeight: 'bold',
     padding: 10,
     marginLeft: -10,
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
   textAtribute: {
     color: 'black',
     fontSize: 17,
-    fontFamily: 'Lobster',
+    fontFamily: (Platform.OS === 'ios') ? 'Arial' : 'sans-serif',
     fontWeight: 'bold',
     padding: 10,
     marginRight: 0,

@@ -30,7 +30,7 @@ export default function AddOtherSupplies({ route, navigation }) {
       return;
     }
 
-    fetch('http://localhost:8080/admin/bookings/addcost?supplies=' + supplies + '&bookingId=' + id, {
+    fetch('https://garagethesis.herokuapp.com/admin/bookings/addcost?supplies=' + supplies + '&bookingId=' + id, {
       method: 'POST',
       mode: 'cors',
       cache: 'no-cache',

@@ -27,7 +27,7 @@ export default function GetBookingsPerWeek({ route, navigation }) {
     // }
 
 
-    fetch('http://localhost:8080/admin/bookings/week?week=' + week, {
+    fetch('https://garagethesis.herokuapp.com/admin/bookings/week?week=' + week, {
       method: 'GET',
       mode: 'cors',
       cache: 'no-cache',

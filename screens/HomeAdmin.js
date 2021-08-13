@@ -21,7 +21,7 @@ export default function HomeAdmin({ route, navigation }) {
               flex: 1,
               borderColor: 'black',
               fontWeight: 'bold',
-              fontFamily: 'Arial',
+              fontFamily: 'Roboto',
               fontSize: 30
              
             }}>
