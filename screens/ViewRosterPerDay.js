@@ -13,10 +13,10 @@ export default function ViewRosterPerDay({ route, navigation }) {
   const { token } = route.params;
   const { username } = route.params;
   const [content, setContent] = useState("");
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  // const [selectedDate, setSelectedDate] = useState(new Date());
 
 
-  const [selectedDate2, setDate] = useState(new Date());
+  const [selectedDate, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
 
@@ -61,7 +61,7 @@ export default function ViewRosterPerDay({ route, navigation }) {
       return newdate;
     }
 
-    fetch('https://garagethesis.herokuapp.com/admin/roster?date=' + convert(selectedDate2), {
+    fetch('https://garagethesis.herokuapp.com/admin/roster?date=' + convert(selectedDate), {
       method: 'GET',
       mode: 'cors',
       cache: 'no-cache',
@@ -105,7 +105,7 @@ export default function ViewRosterPerDay({ route, navigation }) {
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
-          value={selectedDate2}
+          value={selectedDate}
           mode={mode}
           is24Hour={true}
           display="default"
@@ -117,7 +117,7 @@ export default function ViewRosterPerDay({ route, navigation }) {
 
 
         <TouchableOpacity onPress={showDatepicker}>
-          <Text style={styles.title}>{formatDate(selectedDate2)}</Text>
+          <Text style={styles.title}>{formatDate(selectedDate)}</Text>
         </TouchableOpacity>
 
 

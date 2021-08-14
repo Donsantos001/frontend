@@ -13,11 +13,11 @@ export default function GetBookingsPerDay({ route, navigation }) {
   const { token } = route.params;
   const { username } = route.params;
   const [content, setContent] = useState("");
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  // const [selectedDate, setSelectedDate] = useState(new Date());
 
 
   
-  const [selectedDate2, setDate] = useState(new Date());
+  const [selectedDate, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
 
@@ -62,7 +62,7 @@ export default function GetBookingsPerDay({ route, navigation }) {
     }
 
 
-    fetch('https://garagethesis.herokuapp.com/admin/bookings/day?selectedDate=' + convert(selectedDate2), {
+    fetch('https://garagethesis.herokuapp.com/admin/bookings/day?selectedDate=' + convert(selectedDate), {
       method: 'GET',
       mode: 'cors',
       cache: 'no-cache',
@@ -109,7 +109,7 @@ export default function GetBookingsPerDay({ route, navigation }) {
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
-          value={selectedDate2}
+          value={selectedDate}
           mode={mode}
           is24Hour={true}
           display="default"
@@ -121,7 +121,7 @@ export default function GetBookingsPerDay({ route, navigation }) {
 
 
         <TouchableOpacity onPress={showDatepicker}>
-          <Text style={styles.title}>{formatDate(selectedDate2)}</Text>
+          <Text style={styles.title}>{formatDate(selectedDate)}</Text>
         </TouchableOpacity>
 
 
@@ -302,6 +302,7 @@ const styles = StyleSheet.create({
     borderColor: 'chocolate',
     justifyContent: 'space-around',
     marginTop: 15,
+    padding: 10,
     marginBottom: 200,
     alignSelf: "center",
     alignItems: "center",

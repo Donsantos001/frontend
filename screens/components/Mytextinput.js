@@ -48,14 +48,13 @@ const Mytextinput = (props) => {
 };
 
 const styles = StyleSheet.create({
-  // input: {
-  //   backgroundColor: "red",
-  //   outlineWidth: 0,
-  //   height: 40,
-  //   margin: 12,
-  //   borderWidth: 1,
-  //   padding: 10,
-  // },
+  input: {
+    backgroundColor: "red",
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
 });
 
 
